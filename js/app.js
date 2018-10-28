@@ -1,5 +1,6 @@
 const form = document.querySelector('#task-form');
 const taskList = document.querySelector('.collection');
+const clearBtn = document.querySelector('.clear-tasks');
 const taskInput = document.querySelector('#task');
 
 addEventListeners();
@@ -7,6 +8,7 @@ addEventListeners();
 function addEventListeners()    {
     form.addEventListener('submit', addTask);
     taskList.addEventListener('click', removeTask);
+    clearBtn.addEventListener('click', clearTasks);
 }
 
 function addTask(event) {
@@ -31,5 +33,11 @@ function removeTask(event)   {
     const link = event.target.parentElement;
     if (link.classList.contains('delete-item') && confirm(`Delete task "${link.parentElement.textContent}"?`))   {
         link.parentElement.remove();
+    }
+}
+
+function clearTasks()   {
+    while(taskList.firstChild)  {
+        taskList.removeChild(taskList.firstChild);
     }
 }
